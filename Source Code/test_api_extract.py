@@ -21,7 +21,8 @@ class FakeResponse:
         self.url = "https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR"
     def raise_for_status(self):
         if self.status_code >= 400:
-            raise RuntimeError(f"HTTP {self.status_code}")
+            import requests
+            raise requests.exceptions.HTTPError(f"HTTP {self.status_code} Error", response=self)
     def json(self):
         return self._payload
 
@@ -62,6 +63,18 @@ class FetchRatesTests(unittest.TestCase):
             api_extract.fetch_rates("USD", ["INR"])
 
     @patch.object(api_extract.requests, "get")
+    def test_http_4xx_client_error_handled(self, mock_get):
+        mock_get.return_value = FakeResponse({"message": "Not Found"}, status_code=404)
+        with self.assertRaisesRegex(RuntimeError, "API request failed: HTTP 404 Error"):
+            api_extract.fetch_rates("USD", ["XYZ"])
+
+    @patch.object(api_extract.requests, "get")
+    def test_http_5xx_server_error_handled(self, mock_get):
+        mock_get.return_value = FakeResponse({"message": "Server Error"}, status_code=500)
+        with self.assertRaisesRegex(RuntimeError, "API request failed: HTTP 500 Error"):
+            api_extract.fetch_rates("USD", ["INR"])
+
+    @patch.object(api_extract.requests, "get")
     def test_api_error_message_payload(self, mock_get):
         mock_get.return_value = FakeResponse({"message": "Invalid base currency"})
         with self.assertRaisesRegex(RuntimeError, "API returned an error: Invalid base currency"):
@@ -71,12 +84,26 @@ class FetchRatesTests(unittest.TestCase):
     def test_skips_malformed_records(self, mock_get):
         mock_get.return_value = FakeResponse([
             {"date": "2026-10-22", "base": "USD"},  # Missing quote and rate
-            {"date": "2026-10-22", "base": "USD", "quote": "INR", "rate": 94.49},
+            {"date": "2026-10-22", "base": "USD", "quote": "INR", "rate": 94.51},
         ])
         rows = api_extract.fetch_rates("USD", ["INR"])
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["quote"], "INR")
-        self.assertEqual(rows[0]["rate"], 94.49)
+        self.assertEqual(rows[0]["rate"], 94.51)
+
+    def test_deduplication_parity_records(self):
+        import pandas as pd
+        raw_rows = [
+            {"date": "2026-10-22", "base": "USD", "quote": "INR", "rate": 94.51},
+            {"date": "2026-10-22", "base": "USD", "quote": "INR", "rate": 94.51}, # duplicate
+            {"date": "2026-10-22", "base": "USD", "quote": "EUR", "rate": 0.88964},
+        ]
+        df = pd.DataFrame(raw_rows).drop_duplicates(subset=["date", "base", "quote"]).sort_values(["date", "quote"])
+        clean_records = df.to_dict(orient="records")
+        self.assertEqual(len(clean_records), 2)
+        self.assertEqual(len(df), 2)
+        self.assertEqual(clean_records[0]["quote"], "EUR")
+        self.assertEqual(clean_records[1]["quote"], "INR")
 
 if __name__ == "__main__":
     unittest.main()

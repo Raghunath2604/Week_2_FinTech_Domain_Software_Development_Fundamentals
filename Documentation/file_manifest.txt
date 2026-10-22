@@ -1,5 +1,6 @@
 Week 2 project file manifest (excluding Git internals and this manifest)
 
+.gitattributes
 .gitignore
 Datasets/api_extraction_metadata.json
 Datasets/api_response_sample.json

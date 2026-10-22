@@ -2,8 +2,8 @@
 ### Bluestock FinTech Internship — Week 2 Prerequisite Submission
 
 [![Python Version](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-6%2F6%20Passed-2ea44f?style=flat&logo=githubactions&logoColor=white)](file:///Source%20Code/test_api_extract.py)
-[![Verification Status](https://img.shields.io/badge/Pre--Push%20Audit-VERIFIED%20PASS-success?style=flat&logo=checkmarx&logoColor=white)](file:///Documentation/PRE_PUSH_VERIFICATION_REPORT.md)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-9%2F9%20Passed-2ea44f?style=flat&logo=githubactions&logoColor=white)](Source%20Code/test_api_extract.py)
+[![Verification Status](https://img.shields.io/badge/Pre--Push%20Audit-VERIFIED%20PASS-success?style=flat&logo=checkmarx&logoColor=white)](Documentation/PRE_PUSH_VERIFICATION_REPORT.md)
 [![Domain](https://img.shields.io/badge/Domain-FinTech%20%26%20Capital%20Markets-FF6F00?style=flat)](https://bluestock.in/)
 [![Author](https://img.shields.io/badge/Author-RAGHUNATHAREDDY%20GR-blue?style=flat&logo=github)](https://github.com/Raghunath2604)
 
@@ -132,10 +132,10 @@ python -m unittest discover -s "Source Code" -p "test_*.py" -v
 
 | Base Currency | Quote Currency | Reference Exchange Rate | Status |
 |:---:|:---:|---:|:---:|
-| **USD** | **EUR** | `0.88964` | Verified Live |
-| **USD** | **GBP** | `0.74666` | Verified Live |
+| **USD** | **EUR** | `0.88966` | Verified Live |
+| **USD** | **GBP** | `0.74667` | Verified Live |
 | **USD** | **INR** | `94.51000` | Verified Live |
-| **USD** | **JPY** | `157.95000` | Verified Live |
+| **USD** | **JPY** | `157.94000` | Verified Live |
 
 *Source: Frankfurter Public Reference Rate API (`https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY`).*
 

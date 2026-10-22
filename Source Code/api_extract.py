@@ -88,10 +88,12 @@ def main() -> int:
     json_path_alt = args.out_dir / "fx_rates_api_response.json"
     csv_path = args.out_dir / "fx_rates_api.csv"
 
-    formatted_json = json.dumps(rows, indent=2)
-    json_path.write_text(formatted_json, encoding="utf-8")
-    json_path_alt.write_text(formatted_json, encoding="utf-8")
-    df.to_csv(csv_path, index=False, lineterminator='\n')
+    # Export both JSON and CSV from the identical deduplicated and sorted records
+    clean_records = df.to_dict(orient="records")
+    formatted_json = json.dumps(clean_records, indent=2) + "\n"
+    json_path.write_bytes(formatted_json.encode("utf-8"))
+    json_path_alt.write_bytes(formatted_json.encode("utf-8"))
+    df.to_csv(csv_path, index=False, lineterminator="\n")
 
     print(f"HTTP request successful. Rows exported: {len(df)}")
     print(f"JSON: {json_path}")

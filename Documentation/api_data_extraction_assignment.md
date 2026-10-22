@@ -25,20 +25,20 @@ On **22 October 2026**, the public endpoint `https://api.frankfurter.dev/v2/rate
   "date": "2026-10-22",
   "base": "USD",
   "quote": "INR",
-  "rate": 94.49
+  "rate": 94.51
 }
 ```
 
-Selected results (one quote currency per row):
+Selected results (one quote currency per row, reconciled with Datasets/fx_rates_api.csv):
 
 | Date | Base | Quote | Rate |
 |---|---|---|---:|
-| 2026-10-22 | USD | EUR | 0.88962 |
-| 2026-10-22 | USD | GBP | 0.74662 |
-| 2026-10-22 | USD | INR | 94.49 |
-| 2026-10-22 | USD | JPY | 157.97 |
+| 2026-10-22 | USD | EUR | 0.88966 |
+| 2026-10-22 | USD | GBP | 0.74667 |
+| 2026-10-22 | USD | INR | 94.51 |
+| 2026-10-22 | USD | JPY | 157.94 |
 
-**Execution note:** Live execution was verified directly using Python on 22 October 2026 with 4 quote records extracted. The script normalizes fields, enforces type safety, removes duplicates, and ensures perfect parity between the exported JSON and CSV datasets. The API documentation is available at https://frankfurter.dev/.
+**Execution note:** Live execution was verified directly using Python on 22 October 2026 with 4 quote records extracted. The script normalizes fields, enforces type safety, removes duplicates, and ensures 100% parity between the exported JSON and CSV datasets. The API documentation is available at https://frankfurter.dev/.
 
 ## 3. Run the extraction
 

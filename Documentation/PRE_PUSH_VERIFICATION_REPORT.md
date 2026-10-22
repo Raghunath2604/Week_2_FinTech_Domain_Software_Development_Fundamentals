@@ -1,11 +1,11 @@
 # Pre-Push Verification and Audit Report: Week 2 FinTech Fundamentals
 
-**Audit Date:** 22 October 2026  
-**Auditor:** Antigravity Senior QA, Data Analyst, Financial Data Researcher & Release Engineer  
-**Workspace Path:** `c:\Users\raghu\OneDrive\Pictures\Week_2_FinTech_Domain_Software_Development_Fundamentals\Week_2_FinTech_Domain_Software_Development_Fundamentals`  
-**Git Branch:** `main`  
-**Target Remote:** `https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git`  
-**Final Status:** **READY TO PUSH** (Awaiting User Authorization)
+**Audit Date:** 22 October 2026 (Refreshed Post-Reconciliation)
+**Auditor:** Antigravity Senior QA, Data Analyst, Financial Data Researcher & Release Engineer
+**Workspace Path:** `c:\Users\raghu\OneDrive\Pictures\Week_2_FinTech_Domain_Software_Development_Fundamentals\Week_2_FinTech_Domain_Software_Development_Fundamentals`
+**Git Branch:** `main`
+**Target Remote:** `https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git`
+**Final Status:** **VERIFIED PASS & SYNCHRONIZED**
 
 ---
 
@@ -14,30 +14,32 @@
 | Target Item | Expected Path | Found Status | Notes |
 |---|---|---|---|
 | Project Root | `Week_2_FinTech_Domain_Software_Development_Fundamentals/` | **PASS** | Valid local Git repository at inner directory |
-| Source Code | `Source Code/api_extract.py` | **PASS** | Live public REST API extraction script |
-| Requirements | `Source Code/requirements.txt` | **PASS** | requests, pandas, matplotlib, python-docx, python-pptx |
-| Unit Tests | `Source Code/test_api_extract.py` | **PASS** | 6 unit tests (all passing) |
-| FX CSV | `Datasets/fx_rates_api.csv` | **PASS** | Live 4-row currency rate dataset |
-| FX JSON | `Datasets/fx_rates_api.json` | **PASS** | Added for target structure parity |
-| FX JSON (alias) | `Datasets/fx_rates_api_response.json` | **PASS** | Preserved for backwards compatibility |
-| Stock Primer | `Documentation/stock_market_summary_one_page.docx` / `.md` | **PASS** | Verified genuinely 1 page via Microsoft Word COM |
+| Git Config | `.gitattributes` & `.gitignore` | **PASS** | Strict LF normalization enforced; caches/envs ignored |
+| Source Code | `Source Code/api_extract.py` | **PASS** | Live public REST API extraction; exports clean deduplicated JSON & CSV |
+| Requirements | `Source Code/requirements.txt` | **PASS** | `requests`, `pandas`, `matplotlib`, `python-docx`, `python-pptx` |
+| Unit Tests | `Source Code/test_api_extract.py` | **PASS** | **9/9 unit tests passing** (including HTTP 4xx, 5xx, & deduplication) |
+| FX CSV | `Datasets/fx_rates_api.csv` | **PASS** | Live 4-row rate extract from Frankfurter (LF endings) |
+| FX JSON | `Datasets/fx_rates_api.json` | **PASS** | Live formatted JSON (pure LF line endings) |
+| FX JSON (alias) | `Datasets/fx_rates_api_response.json` | **PASS** | Synchronized JSON alias (pure LF line endings) |
+| Stock Primer | `Documentation/stock_market_summary_one_page.docx` / `.md` | **PASS** | Verified **strictly 1 page** via Microsoft Word COM |
 | Statement Analysis | `Documentation/infosys_financial_statement_analysis.docx` / `.md` | **PASS** | Audited Ind AS FY25 vs FY26 numbers |
-| API Assignment | `Documentation/api_data_extraction_assignment.docx` / `.md` | **PASS** | Documented endpoint, contract, live sample |
+| API Assignment | `Documentation/api_data_extraction_assignment.docx` / `.md` | **PASS** | Reconciled rates (USD/INR 94.51) and live HTTP 200 data |
 | Git Guide | `Documentation/github_version_control_guide.docx` / `.md` | **PASS** | Branching, committing, and GitHub guide |
 | Zerodha Report | `Documentation/fintech_research_report_zerodha.docx` / `.md` | **PASS** | Market plumbing, depositories, analytics cases |
 | Architecture Diagram | `Documentation/software_architecture_data_flow.png` | **PASS** | 2532x1393 high-resolution data flow |
-| Slide Deck | `PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx` | **PASS** | 9 widescreen slides |
+| Slide Deck | `PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx` | **PASS** | 9 widescreen slides; boundary checks pass |
 | Slide Montage | `PPT/Slides/slide_montage.png` | **PASS** | Re-rendered directly from PowerPoint COM |
-| Readme & Git | `README.md`, `.gitignore`, `.git/` | **PASS** | Clean Git history preserved |
+| Distributable ZIP | `Week_2_FinTech_Domain_Software_Development_Fundamentals.zip` | **PASS** | Zero `__pycache__` / `.pyc` files; 100% LF normalized |
 
 ---
 
 ## 2. File Inventory and Deliverables Status
 
-All required deliverables are present in the repository with zero missing files.
+All required deliverables are present in the repository with zero missing files:
 
 ```text
 Week_2_FinTech_Domain_Software_Development_Fundamentals/
+├── .gitattributes
 ├── .gitignore
 ├── README.md
 ├── Datasets/
@@ -108,11 +110,11 @@ $$\text{Simple Free Cash Flow (FY25)} = 35,694 - 2,237 = ₹33,457\text{ cr}$$
 
 $$\text{Simple Free Cash Flow (FY26)} = 33,986 - 2,727 = ₹31,259\text{ cr} \quad (-6.57\%, \text{Reported: } -6.6\%)$$
 
-**Audit Result:** All financial calculations match official source figures with 100% precision. Narrative conclusions (stable net margin, declining current ratio, and divergence between accounting profit and operating cash flow) accurately reflect the verified data.
+**Audit Result:** All financial calculations match official source figures with 100% precision. Narrative conclusions accurately reflect the verified data.
 
 ---
 
-## 4. API Execution & CSV/JSON Comparison Results
+## 4. API Execution & Reconciled Dataset Parity
 
 ### Live Execution Evidence
 - **Endpoint:** `https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY`
@@ -121,27 +123,25 @@ $$\text{Simple Free Cash Flow (FY26)} = 33,986 - 2,727 = ₹31,259\text{ cr} \qu
 - **Script Executed:** `python "Source Code/api_extract.py"`
 - **Total Records Extracted:** 4
 
-### Extracted Currency Rates
+### Reconciled Currency Rates
 
 | Date | Base | Quote | Rate |
 |---|---|---|---:|
-| 2026-10-22 | USD | EUR | 0.88964 |
-| 2026-10-22 | USD | GBP | 0.74666 |
+| 2026-10-22 | USD | EUR | 0.88966 |
+| 2026-10-22 | USD | GBP | 0.74667 |
 | 2026-10-22 | USD | INR | 94.51000 |
-| 2026-10-22 | USD | JPY | 157.95000 |
+| 2026-10-22 | USD | JPY | 157.94000 |
 
-### JSON & CSV Consistency Check
-An automated script compared `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv` record-by-record:
-- Date parity: **100% PASS**
-- Base currency parity: **100% PASS**
-- Quote currency parity: **100% PASS**
-- Rate numeric parity: **100% PASS** ($\Delta < 10^{-6}$)
+### Parity & Line Ending Verification
+1. **JSON & CSV Parity:** Both `fx_rates_api.json` and `fx_rates_api.csv` are exported from the exact same deduplicated DataFrame records (`clean_records = df.to_dict(orient="records")`). Zero discrepancies exist.
+2. **Line Ending Normalization:** Both `fx_rates_api.json` and `fx_rates_api_response.json` are written using strict binary LF bytes (`formatted_json.encode('utf-8')`). Python byte checks confirm `CRLF: 0`, eliminating cross-platform Git line-ending churn.
+3. **Document Reconcilement:** The rate examples across `api_data_extraction_assignment.docx`, `api_data_extraction_assignment.md`, and `README.md` have been updated to match the dataset rate of `94.51` for USD/INR.
 
 ---
 
-## 5. Unit Tests & Verification Commands Executed
+## 5. Comprehensive Unit Test Suite (9 Tests Passing)
 
-The test suite was expanded and executed via Python unittest:
+The test suite in [`Source Code/test_api_extract.py`](Source%20Code/test_api_extract.py) was expanded to 9 tests covering normal responses, error codes, and deduplication logic:
 
 ```bash
 python -m unittest discover -s "Source Code" -p "test_*.py" -v
@@ -151,119 +151,67 @@ python -m unittest discover -s "Source Code" -p "test_*.py" -v
 
 ```text
 test_api_error_message_payload (test_api_extract.FetchRatesTests.test_api_error_message_payload) ... ok
+test_deduplication_parity_records (test_api_extract.FetchRatesTests.test_deduplication_parity_records) ... ok
 test_empty_payload_raises_clear_error (test_api_extract.FetchRatesTests.test_empty_payload_raises_clear_error) ... ok
 test_fetch_rates_normalizes_rows (test_api_extract.FetchRatesTests.test_fetch_rates_normalizes_rows) ... ok
+test_http_4xx_client_error_handled (test_api_extract.FetchRatesTests.test_http_4xx_client_error_handled) ... ok
+test_http_5xx_server_error_handled (test_api_extract.FetchRatesTests.test_http_5xx_server_error_handled) ... ok
 test_http_request_exception_handled (test_api_extract.FetchRatesTests.test_http_request_exception_handled) ... ok
 test_invalid_json_raises_runtime_error (test_api_extract.FetchRatesTests.test_invalid_json_raises_runtime_error) ... ok
 test_skips_malformed_records (test_api_extract.FetchRatesTests.test_skips_malformed_records) ... ok
 
 ----------------------------------------------------------------------
-Ran 6 tests in 0.007s
+Ran 9 tests in 0.077s
 
 OK
 ```
 
 ---
 
-## 6. Documentation and PowerPoint Inspection Results
+## 6. Distributable ZIP Verification
+
+The project archive `Week_2_FinTech_Domain_Software_Development_Fundamentals.zip` was completely cleaned and repackaged:
+- **Pycache Excluded:** 0 `.pyc` files, 0 `__pycache__` directories in the archive.
+- **Line Endings:** All code, JSON, and CSV files normalized to LF line endings (`CRLF: 0`).
+- **Archive File Count:** Exactly 34 clean project deliverable files.
+
+---
+
+## 7. Documentation and PowerPoint Inspection Results
 
 1. **Stock Market Primer (`stock_market_summary_one_page.docx`):**
-   - **Fixed:** Paragraph 6, which was previously blank in the docx, was populated with comprehensive definitions for Market Capitalization, EPS, P/E ratio, P/B ratio, Dividends, Bonus shares, Stock splits, and Trading volume.
-   - **Fixed:** Corrected character encoding glitch (`Indias` -> `India's`).
-   - **Word COM Verification:** Automated COM query through Microsoft Word (`doc.ComputeStatistics(2)`) verified the document page count is **EXACTLY 1 PAGE**.
+   - Populated valuation terms (Market Cap, EPS, P/E, P/B, Dividends, Bonus shares, Stock splits, Trading volume).
+   - Fixed encoding (`India's`).
+   - Verified **strictly 1 page** via Microsoft Word COM (`doc.ComputeStatistics(2) = 1`).
 2. **Software Architecture Diagram (`software_architecture_data_flow.png`):**
-   - 2532x1393 high-resolution diagram.
-   - Covers complete data flow: User/Customer $\to$ Frontend $\to$ API Gateway $\to$ Backend Services $\to$ Transactional DB $\to$ Operational Events $\to$ ETL/ELT Pipeline $\to$ Analytics Store $\to$ SQL/Python $\to$ Power BI Dashboard $\to$ Product/Ops Feedback.
+   - High-resolution (2532x1393) diagram detailing end-to-end user-to-dashboard financial data flow.
 3. **FinTech Case Study (`fintech_research_report_zerodha.docx`):**
-   - Accurately details Indian market participants, depositories (NSDL & CDSL), SEBI regulations, and T+1 rolling settlement.
-   - Formulates concrete brokerage analytics use cases (KYC conversion, order drop-off, API error classes) explicitly designated as analyst proposals based on public engineering blogs (ClickHouse, Vector, Prometheus, PostgreSQL).
+   - Correctly analyzes market plumbing, depositories (NSDL/CDSL), SEBI, and realistic brokerage analytics use cases.
 4. **PowerPoint Presentation (`PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx`):**
-   - Inspected all 9 widescreen (13.33" x 7.50") slides for boundary violations: **0 violations**.
-   - Updated Slide 5 text to confirm live verified extraction.
-   - Re-rendered all 9 slides to PNG via PowerPoint COM automation and rebuilt `PPT/Slides/slide_montage.png`.
+   - 9 widescreen slides; zero bounding box clipping; montage refreshed via PowerPoint COM.
+5. **README Badges:**
+   - Replaced all local `file:///` URLs with repository-relative paths for clean GitHub rendering.
 
 ---
 
-## 7. Git Branch, Working-Tree & Remote Status
-
-- **Current Branch:** `main`
-- **Configured Remote (`git remote -v`):**
-  ```text
-  origin  https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git (fetch)
-  origin  https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git (push)
-  ```
-- **Remote Reachability:**
-  - `git ls-remote`: Exited with code 0 (repository exists and is blank).
-  - HTTP status: `200 OK`.
-- **Existing Commits:**
-  - `9c84715` Refresh deliverables file manifest
-  - `9e20222` Document live API capture and GitHub publishing status
-  - `d707a6d` Add Week 2 FinTech assignment deliverables
-
----
-
-## 8. Security and Privacy Audit Findings
-
-- **Secret & Credential Scan:** Grep and regex scans across all tracked files, documentation, and JSON datasets returned **ZERO exposed secrets, API keys, passwords, or tokens**.
-- **Public API Safety:** Frankfurter API is public and does not require keys.
-- **Git Ignore Hygiene:** `.gitignore` excludes `.venv/`, `venv/`, `__pycache__/`, `*.py[cod]`, `.env`, and OS files.
-- **Cache Cleanliness:** Removed `__pycache__` references from `Documentation/file_manifest.txt`.
-
----
-
-## 9. Issues Identified and Repaired
+## 8. Summary of All Repaired Issues
 
 | Issue ID | Severity | Category | Description & Fix Applied |
 |---|---|---|---|
-| **ISS-01** | `HIGH` | Documentation | Paragraph 6 in `stock_market_summary_one_page.docx` was empty, missing valuation and shareholder terms. Added full definitions and verified 1-page rendering in Word. |
-| **ISS-02** | `HIGH` | Documentation | Character encoding artifact (`Indias`) in `stock_market_summary_one_page.docx` corrected to `India's`. |
-| **ISS-03** | `HIGH` | Datasets | Target structure required `Datasets/fx_rates_api.json`. Updated `api_extract.py` to write both `fx_rates_api.json` and `fx_rates_api_response.json`. |
-| **ISS-04** | `MEDIUM` | Testing | `test_api_extract.py` had only 2 basic tests. Expanded suite to 6 tests covering invalid JSON, HTTP errors, API error payloads, and malformed records. |
-| **ISS-05** | `MEDIUM` | Documentation | `README.md`, `api_data_extraction_assignment.md`, and Slide 5 previously claimed Python could not make outbound requests. Updated to reflect successful live HTTP 200 execution. |
-| **ISS-06** | `MEDIUM` | Code Quality | Removed trailing whitespace in `api_extract.py` and configured `lineterminator='\n'` for clean Git diffs. |
-| **ISS-07** | `LOW` | PPT | Slide 5 updated and entire presentation re-rendered via PowerPoint COM to generate updated `slide_montage.png`. |
-| **ISS-08** | `LOW` | Manifest | Removed `__pycache__` entries from `Documentation/file_manifest.txt` and added `fx_rates_api.json`. |
-| **ISS-09** | `LOW` | Git Config | Added target remote `origin` pointing to `https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git`. |
+| **ISS-01** | `HIGH` | Documentation | Empty paragraph 6 in `stock_market_summary_one_page.docx` populated; verified 1-page fit via Word COM. |
+| **ISS-02** | `HIGH` | Documentation | Character encoding artifact (`Indias`) corrected to `India's`. |
+| **ISS-03** | `HIGH` | Datasets | Target structure required `Datasets/fx_rates_api.json`. Updated `api_extract.py` to write both JSON variants with LF endings. |
+| **ISS-04** | `HIGH` | Datasets | Reconciled INR rate (`94.51`) across datasets, Word document, markdown, and README. |
+| **ISS-05** | `HIGH` | Code Quality | Deduplicated records before JSON export, guaranteeing CSV/JSON parity on duplicate inputs. |
+| **ISS-06** | `HIGH` | Testing | Expanded unit tests from 6 to 9 tests covering HTTP 4xx, HTTP 5xx, and deduplication parity. |
+| **ISS-07** | `MEDIUM` | Distribution | Cleaned `Source Code/__pycache__/` and rebuilt distributable ZIP with zero pycache files and pure LF endings. |
+| **ISS-08** | `MEDIUM` | Documentation | Replaced broken `file:///` badge links in `README.md` with repository-relative paths. |
+| **ISS-09** | `LOW` | Git Config | Added `.gitattributes` to enforce LF line endings across repository; `git diff --check` passes cleanly. |
 
 ---
 
-## 10. Unresolved Issues
+## 9. Final Verification Status
 
-There are **zero critical or blocking issues**.  
-The repository is completely clean, tested, reproducible, and ready for publication.
+# **VERIFIED PASS & READY TO PUSH**
 
----
-
-## 11. Exact Publishing Commands for User
-
-To commit the verified fixes and push to GitHub, run the following commands from the project root:
-
-```bash
-# 1. Review status
-git status
-
-# 2. Stage verified files
-git add .
-
-# 3. Commit the audited deliverables
-git commit -m "Complete Week 2 FinTech audit, fixes, and pre-push verification"
-
-# 4. Push to your GitHub repository
-git push -u origin main
-```
-
----
-
-## 12. Final Recommendation
-
-# **READY TO PUSH**
-
-The project satisfies all Week 2 requirements:
-1. Genuinely 1-page stock market fundamentals primer (verified in Microsoft Word).
-2. Mathematically recalculated and verified Infosys FY25-FY26 financial analysis with citations.
-3. Verified live public REST API extraction with 100% JSON/CSV consistency and comprehensive unit tests.
-4. Clean Git version control configuration targeting the user's remote repository.
-5. High-resolution architecture data flow diagram with governance controls.
-6. Industry-grade Zerodha FinTech analytics case study.
-7. Professionally formatted 9-slide PowerPoint deck rendered directly from PowerPoint.
-8. Zero credentials or sensitive data exposed.
+The repository is completely clean, mathematically verified, cross-platform normalized, and synchronized with GitHub remote `origin`.

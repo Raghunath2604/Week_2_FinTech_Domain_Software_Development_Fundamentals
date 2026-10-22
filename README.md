@@ -9,11 +9,11 @@
 
 ---
 
-## Executive Overview
+## Project Overview
 
-This repository contains the completed, audited, and mentor-ready assignment deliverables for **Week 2: FinTech Domain & Software Development Fundamentals** as part of the Bluestock FinTech internship program.
+This repository contains my completed coursework and project deliverables for **Week 2: FinTech Domain & Software Development Fundamentals** in the Bluestock FinTech internship program.
 
-The project bridges capital markets domain theory, empirical corporate financial analysis, production-grade Python data extraction, distributed software architecture, and modern FinTech business analytics. Every deliverable has been verified for technical reproducibility, mathematical precision against audited financial filings, and code quality.
+The project combines foundational capital markets concepts, financial statement analysis of Infosys Limited, a live currency rate data extraction pipeline in Python, a software architecture data-flow design, and a FinTech analytics research report on Zerodha. All calculations have been cross-checked against official annual reports and verified against live API responses.
 
 ---
 
@@ -49,7 +49,7 @@ Week_2_FinTech_Domain_Software_Development_Fundamentals/
 │   └── infosys_financials_fy25_fy26.csv            # Audited Infosys Ind AS financial dataset
 │
 ├── Documentation/                                  # Research reports and technical documentation
-│   ├── PRE_PUSH_VERIFICATION_REPORT.md             # Comprehensive Senior QA audit report
+│   ├── PRE_PUSH_VERIFICATION_REPORT.md             # Pre-submission verification and test report
 │   ├── api_data_extraction_assignment.docx         # REST API extraction documentation (Word)
 │   ├── api_data_extraction_assignment.md           # REST API extraction documentation (Markdown)
 │   ├── file_manifest.txt                           # Verified inventory of all deliverables
@@ -76,7 +76,7 @@ Week_2_FinTech_Domain_Software_Development_Fundamentals/
 └── Source Code/                                    # Python implementation and test suites
     ├── api_extract.py                              # Live public REST API data extraction script
     ├── requirements.txt                            # Project dependencies (requests, pandas, etc.)
-    └── test_api_extract.py                         # 6-case unit test suite (100% passing)
+    └── test_api_extract.py                         # 9-case unit test suite (100% passing)
 ```
 
 ---
@@ -169,15 +169,16 @@ All 9 widescreen presentation slides rendered with zero clipping or layout viola
 
 ---
 
-## Quality Assurance & Pre-Push Verification
+## Verification & Pre-Submission Checks
 
-A comprehensive audit was performed prior to publication. Complete technical evidence, recalculations, and command logs are documented in [`Documentation/PRE_PUSH_VERIFICATION_REPORT.md`](Documentation/PRE_PUSH_VERIFICATION_REPORT.md).
+Before submitting this assignment to Bluestock mentors, I ran a detailed check across all calculations, code, and documentation:
+- **One-Page Document Check:** Verified in Microsoft Word that `stock_market_summary_one_page.docx` renders on exactly one page without overflowing.
+- **Financial Calculations:** Cross-checked all YoY growth rates, margins, and ratios against Infosys FY25 and FY26 audited Ind AS financial statements.
+- **API & Data Parity:** Confirmed that `fx_rates_api.json` and `fx_rates_api.csv` contain identical, deduplicated records extracted live from the Frankfurter API.
+- **Unit Testing:** Built and executed 9 unit tests in Python verifying normal extraction, deduplication, and error handling (HTTP 4xx, 5xx, and malformed JSON).
+- **Clean Repository:** Tracked files are clean of credentials, temporary files, and Python cache artifacts.
 
-- **Document Length Verification:** `stock_market_summary_one_page.docx` programmatically queried via Microsoft Word COM automation (`ComputeStatistics(2)`) $\to$ **Genuinely 1 Page**.
-- **Financial Calculation Accuracy:** 100% agreement between reported percentages and raw formula recalculations.
-- **Data Parity:** Programmatic assertion confirms zero discrepancies between `fx_rates_api.json` and `fx_rates_api.csv`.
-- **Security & Privacy:** 0 hardcoded credentials, secret keys, or PII found across Git history and tracked files.
-- **Git Tree Hygiene:** Zero whitespace errors detected by `git diff --check`.
+Full verification details, test logs, and command outputs are recorded in [`Documentation/PRE_PUSH_VERIFICATION_REPORT.md`](Documentation/PRE_PUSH_VERIFICATION_REPORT.md).
 
 ---
 

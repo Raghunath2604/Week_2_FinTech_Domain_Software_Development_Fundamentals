@@ -1,0 +1,13 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+
+# Temporary editor / system files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Raw API pulls may change by date; keep example fixture but ignore live responses

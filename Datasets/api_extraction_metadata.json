@@ -1,0 +1,13 @@
+{
+  "capture_date": "2026-10-22",
+  "endpoint_queried": "https://api.frankfurter.dev/v2/rates?base=USD",
+  "documentation": "https://frankfurter.dev/",
+  "filtered_quotes": [
+    "EUR",
+    "GBP",
+    "INR",
+    "JPY"
+  ],
+  "selected_response_rows": 4,
+  "note": "Values are filtered from the live public API JSON response retrieved for this assignment. The container shell could not independently call the host due to outbound DNS restrictions; run Source Code/api_extract.py on an internet-connected machine to independently refresh the files. Values are reference rates, not tradable bid/ask quotes."
+}

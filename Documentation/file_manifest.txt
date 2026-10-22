@@ -1,0 +1,27 @@
+.gitignore
+Datasets/api_response_sample.json
+Datasets/api_sample_data_note.txt
+Datasets/fx_rates_sample.csv
+Datasets/infosys_financials_fy25_fy26.csv
+Documentation/api_data_extraction_assignment.docx
+Documentation/api_data_extraction_assignment.md
+Documentation/fintech_research_report_zerodha.docx
+Documentation/fintech_research_report_zerodha.md
+Documentation/github_version_control_guide.docx
+Documentation/github_version_control_guide.md
+Documentation/infosys_financial_statement_analysis.docx
+Documentation/infosys_financial_statement_analysis.md
+Documentation/infosys_financial_trend.png
+Documentation/software_architecture_data_flow.png
+Documentation/software_architecture_diagram_notes.md
+Documentation/software_development_fundamentals.docx
+Documentation/software_development_fundamentals.md
+Documentation/sources_and_references.md
+Documentation/stock_market_summary_one_page.docx
+Documentation/stock_market_summary_one_page.md
+PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx
+PPT/Slides/slide_montage.png
+README.md
+Source Code/api_extract.py
+Source Code/requirements.txt
+Source Code/test_api_extract.py

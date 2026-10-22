@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-10-22",
+    "base": "USD",
+    "quote": "EUR",
+    "rate": 0.89036
+  },
+  {
+    "date": "2026-10-22",
+    "base": "USD",
+    "quote": "GBP",
+    "rate": 0.74756
+  },
+  {
+    "date": "2026-10-22",
+    "base": "USD",
+    "quote": "INR",
+    "rate": 94.58
+  },
+  {
+    "date": "2026-10-22",
+    "base": "USD",
+    "quote": "JPY",
+    "rate": 158.15
+  }
+]

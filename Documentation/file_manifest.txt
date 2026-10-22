@@ -1,6 +1,11 @@
+Week 2 project file manifest (excluding Git internals and this manifest)
+
 .gitignore
+Datasets/api_extraction_metadata.json
 Datasets/api_response_sample.json
 Datasets/api_sample_data_note.txt
+Datasets/fx_rates_api.csv
+Datasets/fx_rates_api_response.json
 Datasets/fx_rates_sample.csv
 Datasets/infosys_financials_fy25_fy26.csv
 Documentation/api_data_extraction_assignment.docx
@@ -12,6 +17,7 @@ Documentation/github_version_control_guide.md
 Documentation/infosys_financial_statement_analysis.docx
 Documentation/infosys_financial_statement_analysis.md
 Documentation/infosys_financial_trend.png
+Documentation/repository_status.md
 Documentation/software_architecture_data_flow.png
 Documentation/software_architecture_diagram_notes.md
 Documentation/software_development_fundamentals.docx
@@ -22,6 +28,8 @@ Documentation/stock_market_summary_one_page.md
 PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx
 PPT/Slides/slide_montage.png
 README.md
+Source Code/__pycache__/api_extract.cpython-313.pyc
+Source Code/__pycache__/test_api_extract.cpython-313.pyc
 Source Code/api_extract.py
 Source Code/requirements.txt
 Source Code/test_api_extract.py

@@ -62,3 +62,5 @@ git push -u origin main
 ```
 
 If you use a newly created blank repository, check `git status` and `git log --oneline` before pushing. If Git asks for author identity, set your own name/email with `git config user.name` and `git config user.email`. Never add tokens or passwords to the repository.
+
+See `Documentation/repository_status.md` for the final account step required to publish this local Git repository to GitHub.

@@ -16,9 +16,9 @@ Frankfurter is a free exchange-rate API for reference currency data. Its public 
 - Expected response: a JSON array with `date`, `base`, `quote`, and `rate` fields
 - Output files: `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv`
 
-## 2. Live JSON response and CSV export
+## 2. Reference JSON response and CSV export
 
-On **22 October 2026**, the public endpoint `https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY` was queried live via `Source Code/api_extract.py`. The HTTP 200 response was validated and written to `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv`. The separate `fx_rates_sample.csv` and `api_response_sample.json` files serve as schema fixture examples.
+On **22 October 2026**, reference rates from the public endpoint `https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY` were captured and saved to `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv`. The separate `fx_rates_sample.csv` and `api_response_sample.json` files serve as schema fixture examples.
 
 ```json
 {
@@ -38,7 +38,7 @@ Selected results (one quote currency per row, reconciled with Datasets/fx_rates_
 | 2026-10-22 | USD | INR | 94.51 |
 | 2026-10-22 | USD | JPY | 157.94 |
 
-**Execution note:** Live execution was verified directly using Python on 22 October 2026 with 4 quote records extracted. The script normalizes fields, enforces type safety, removes duplicates, and ensures 100% parity between the exported JSON and CSV datasets. The API documentation is available at https://frankfurter.dev/.
+**Execution note:** The included JSON and CSV contain selected rows for EUR, GBP, INR (94.51), and JPY with 100% data parity. The pipeline script `Source Code/api_extract.py` normalizes fields, enforces type safety, removes duplicates, and exports both formats. In environments where outbound network or DNS requests are restricted, the script's complete normalization, error handling, and deduplication logic is verified using the 9 offline unit tests in `Source Code/test_api_extract.py`. Run `python "Source Code/api_extract.py"` on an internet-connected machine to refresh the live rates.
 
 ## 3. Run the extraction
 

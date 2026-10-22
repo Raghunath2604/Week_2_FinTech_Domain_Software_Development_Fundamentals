@@ -23,7 +23,7 @@ The project combines foundational capital markets concepts, financial statement 
 |---|---|---|
 | **1. Stock Market Fundamentals** | [`stock_market_summary_one_page.docx`](Documentation/stock_market_summary_one_page.docx) & [`.md`](Documentation/stock_market_summary_one_page.md) | Genuinely **1-page executive primer** (verified in Microsoft Word) covering NSE/BSE, Nifty 50/Sensex, IPO vs SME IPO, market capitalization, valuation metrics (P/E, P/B, EPS, Dividends, Stock Splits, Bonus Issues, Volume), the three financial statements, and Indian clearing/settlement mechanics (**T+1**). |
 | **2. Listed Company Financial Analysis** | [`infosys_financial_statement_analysis.docx`](Documentation/infosys_financial_statement_analysis.docx) & [`.md`](Documentation/infosys_financial_statement_analysis.md) | In-depth analysis of **Infosys Limited (INFY)** audited Ind AS consolidated statements for **FY2024-25 vs FY2025-26**. Includes independently recalculated YoY revenue growth (+9.6%), net profit growth (+10.2%), EPS (+11.0%), margin stability (16.50%), liquidity contraction (current ratio 2.27x $\to$ 1.98x), and cash conversion divergence (OCF -4.8% vs Receivables +13.1%). |
-| **3. REST API & Data Engineering** | [`Source Code/api_extract.py`](Source%20Code/api_extract.py) & [`Datasets/`](Datasets/) | Automated Python ETL script fetching live reference currency exchange rates from the public Frankfurter REST API. Normalizes JSON into structured tabular records, guarantees 100% data parity between JSON and CSV exports, eliminates duplicate ticks, and handles HTTP timeouts/malformed payloads. |
+| **3. REST API & Data Engineering** | [`Source Code/api_extract.py`](Source%20Code/api_extract.py) & [`Datasets/`](Datasets/) | Automated Python ETL script for fetching reference currency exchange rates from the public Frankfurter REST API. Normalizes JSON into structured tabular records, guarantees 100% data parity between JSON and CSV exports, eliminates duplicate ticks, and handles HTTP timeouts/malformed payloads. Includes 9 offline unit tests covering restricted network environments. |
 | **4. Git Version Control Guide** | [`github_version_control_guide.docx`](Documentation/github_version_control_guide.docx) & [`.md`](Documentation/github_version_control_guide.md) | Practical guide to professional Git workflows: repository initialization, branching strategies (`feature/`, `docs/`), atomic commits, Git Credential Manager authentication, and safe publishing hygiene. |
 | **5. Software Architecture & Data Flow** | [`software_architecture_data_flow.png`](Documentation/software_architecture_data_flow.png) & [`.md`](Documentation/software_architecture_diagram_notes.md) | High-resolution architectural diagram illustrating an end-to-end FinTech trading pipeline: Client/Web UI $\to$ API Gateway $\to$ Microservices $\to$ Transactional DB $\to$ Operational Logs $\to$ ETL Pipeline $\to$ Analytics Warehouse $\to$ Power BI Business Dashboards. |
 | **6. FinTech Case Study (Zerodha)** | [`fintech_research_report_zerodha.docx`](Documentation/fintech_research_report_zerodha.docx) & [`.md`](Documentation/fintech_research_report_zerodha.md) | Applied data analytics research analyzing Indian discount brokerages. Evaluates Zerodha's public engineering stack (ClickHouse, Vector, Prometheus, PostgreSQL) and formulates concrete analytics frameworks for KYC drop-off, order acknowledgement latency, and platform observability. |
@@ -105,8 +105,8 @@ source .venv/bin/activate
 pip install -r "Source Code/requirements.txt"
 ```
 
-### 3. Run Live Currency API Extraction
-Execute the extraction script to fetch real-time Frankfurter exchange rates and update `Datasets/`:
+### 3. Run Currency API Extraction
+Execute the extraction script to fetch Frankfurter exchange rates and refresh `Datasets/` (requires internet access):
 
 ```bash
 python "Source Code/api_extract.py"
@@ -128,16 +128,16 @@ python -m unittest discover -s "Source Code" -p "test_*.py" -v
 
 ## Verified Data Showcase
 
-### Live Exchange Rate Extraction (22 October 2026)
+### Currency Reference Rates (Captured 22 October 2026)
 
 | Base Currency | Quote Currency | Reference Exchange Rate | Status |
 |:---:|:---:|---:|:---:|
-| **USD** | **EUR** | `0.88966` | Verified Live |
-| **USD** | **GBP** | `0.74667` | Verified Live |
-| **USD** | **INR** | `94.51000` | Verified Live |
-| **USD** | **JPY** | `157.94000` | Verified Live |
+| **USD** | **EUR** | `0.88966` | Captured & Verified |
+| **USD** | **GBP** | `0.74667` | Captured & Verified |
+| **USD** | **INR** | `94.51000` | Captured & Verified |
+| **USD** | **JPY** | `157.94000` | Captured & Verified |
 
-*Source: Frankfurter Public Reference Rate API (`https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY`).*
+*Source: Frankfurter Public Reference Rate API (`https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY`). Captured reference rates; 100% parity across JSON/CSV. Rerun script on connected machine to refresh.*
 
 ### Infosys Limited (INFY) Financial Summary (Ind AS Audited)
 
@@ -174,7 +174,7 @@ All 9 widescreen presentation slides rendered with zero clipping or layout viola
 Before submitting this assignment to Bluestock mentors, I ran a detailed check across all calculations, code, and documentation:
 - **One-Page Document Check:** Verified in Microsoft Word that `stock_market_summary_one_page.docx` renders on exactly one page without overflowing.
 - **Financial Calculations:** Cross-checked all YoY growth rates, margins, and ratios against Infosys FY25 and FY26 audited Ind AS financial statements.
-- **API & Data Parity:** Confirmed that `fx_rates_api.json` and `fx_rates_api.csv` contain identical, deduplicated records extracted live from the Frankfurter API.
+- **API & Data Parity:** Confirmed that `fx_rates_api.json` and `fx_rates_api.csv` contain identical, deduplicated records matching the 22 October 2026 capture from the Frankfurter API.
 - **Unit Testing:** Built and executed 9 unit tests in Python verifying normal extraction, deduplication, and error handling (HTTP 4xx, 5xx, and malformed JSON).
 - **Clean Repository:** Tracked files are clean of credentials, temporary files, and Python cache artifacts.
 

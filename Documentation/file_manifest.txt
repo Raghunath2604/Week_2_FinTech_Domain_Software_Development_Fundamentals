@@ -5,11 +5,14 @@ Datasets/api_extraction_metadata.json
 Datasets/api_response_sample.json
 Datasets/api_sample_data_note.txt
 Datasets/fx_rates_api.csv
+Datasets/fx_rates_api.json
 Datasets/fx_rates_api_response.json
 Datasets/fx_rates_sample.csv
 Datasets/infosys_financials_fy25_fy26.csv
+Documentation/PRE_PUSH_VERIFICATION_REPORT.md
 Documentation/api_data_extraction_assignment.docx
 Documentation/api_data_extraction_assignment.md
+Documentation/file_manifest.txt
 Documentation/fintech_research_report_zerodha.docx
 Documentation/fintech_research_report_zerodha.md
 Documentation/github_version_control_guide.docx
@@ -28,8 +31,6 @@ Documentation/stock_market_summary_one_page.md
 PPT/Slides/Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx
 PPT/Slides/slide_montage.png
 README.md
-Source Code/__pycache__/api_extract.cpython-313.pyc
-Source Code/__pycache__/test_api_extract.cpython-313.pyc
 Source Code/api_extract.py
 Source Code/requirements.txt
 Source Code/test_api_extract.py

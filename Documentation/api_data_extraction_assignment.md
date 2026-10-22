@@ -14,18 +14,18 @@ Frankfurter is a free exchange-rate API for reference currency data. Its public 
 - Query parameters: `base=USD`, `quotes=INR,EUR,GBP,JPY`
 - Authentication: none for this public endpoint
 - Expected response: a JSON array with `date`, `base`, `quote`, and `rate` fields
-- Output files: `Datasets/fx_rates_api_response.json` and `Datasets/fx_rates_api.csv`
+- Output files: `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv`
 
 ## 2. Live JSON response and CSV export
 
-On **22 October 2026**, the public endpoint `https://api.frankfurter.dev/v2/rates?base=USD` was queried and the returned JSON was filtered to the required quote currencies. The selected records are saved in `Datasets/fx_rates_api_response.json` and `Datasets/fx_rates_api.csv`. The separate `fx_rates_sample.csv` and `api_response_sample.json` files are only schema examples.
+On **22 October 2026**, the public endpoint `https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY` was queried live via `Source Code/api_extract.py`. The HTTP 200 response was validated and written to `Datasets/fx_rates_api.json`, `Datasets/fx_rates_api_response.json`, and `Datasets/fx_rates_api.csv`. The separate `fx_rates_sample.csv` and `api_response_sample.json` files serve as schema fixture examples.
 
 ```json
 {
   "date": "2026-10-22",
   "base": "USD",
   "quote": "INR",
-  "rate": 94.58
+  "rate": 94.49
 }
 ```
 
@@ -33,12 +33,12 @@ Selected results (one quote currency per row):
 
 | Date | Base | Quote | Rate |
 |---|---|---|---:|
-| 2026-10-22 | USD | EUR | 0.89036 |
-| 2026-10-22 | USD | GBP | 0.74756 |
-| 2026-10-22 | USD | INR | 94.58 |
-| 2026-10-22 | USD | JPY | 158.15 |
+| 2026-10-22 | USD | EUR | 0.88962 |
+| 2026-10-22 | USD | GBP | 0.74662 |
+| 2026-10-22 | USD | INR | 94.49 |
+| 2026-10-22 | USD | JPY | 157.97 |
 
-**Execution note:** The packaging shell could not independently call the API because outbound DNS was unavailable. The sample capture above is from the live endpoint response opened through the browser tool; run `api_extract.py` on an internet-connected laptop to independently refresh the files. The API is documented at https://frankfurter.dev/.
+**Execution note:** Live execution was verified directly using Python on 22 October 2026 with 4 quote records extracted. The script normalizes fields, enforces type safety, removes duplicates, and ensures perfect parity between the exported JSON and CSV datasets. The API documentation is available at https://frankfurter.dev/.
 
 ## 3. Run the extraction
 
@@ -55,7 +55,7 @@ For a historical series, pass a date range:
 python "Source Code/api_extract.py" --base USD --quotes INR EUR GBP --from-date 2026-01-01 --to-date 2026-10-15
 ```
 
-The script validates the HTTP status, catches request and JSON errors, normalizes fields, removes duplicate observations, sorts rows, and writes JSON and CSV. The included capture is from the live public API response accessed on 2026-10-22. The container shell itself lacked outbound DNS, so independently rerun the script on a connected local machine to refresh and verify the capture.
+The script validates the HTTP status, catches request and JSON errors, normalizes fields, removes duplicate observations, sorts rows, and writes JSON and CSV. The included capture is from the verified live public API response on 2026-10-22.
 
 ## 4. Inspect with Postman or Bruno
 

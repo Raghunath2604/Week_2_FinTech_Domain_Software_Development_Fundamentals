@@ -84,13 +84,18 @@ def main() -> int:
         return 1
 
     df = pd.DataFrame(rows).drop_duplicates(subset=["date", "base", "quote"]).sort_values(["date", "quote"])
-    json_path = args.out_dir / "fx_rates_api_response.json"
+    json_path = args.out_dir / "fx_rates_api.json"
+    json_path_alt = args.out_dir / "fx_rates_api_response.json"
     csv_path = args.out_dir / "fx_rates_api.csv"
-    json_path.write_text(json.dumps(rows, indent=2), encoding="utf-8")
-    df.to_csv(csv_path, index=False)
+
+    formatted_json = json.dumps(rows, indent=2)
+    json_path.write_text(formatted_json, encoding="utf-8")
+    json_path_alt.write_text(formatted_json, encoding="utf-8")
+    df.to_csv(csv_path, index=False, lineterminator='\n')
 
     print(f"HTTP request successful. Rows exported: {len(df)}")
     print(f"JSON: {json_path}")
+    print(f"JSON (alias): {json_path_alt}")
     print(f"CSV:  {csv_path}")
     print("Preview:")
     print(df.head(10).to_string(index=False))

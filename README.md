@@ -15,10 +15,12 @@ Week_2_FinTech_Domain_Software_Development_Fundamentals/
 │   ├── fx_rates_sample.csv
 │   ├── api_response_sample.json
 │   ├── fx_rates_api.csv
+│   ├── fx_rates_api.json
 │   ├── fx_rates_api_response.json
 │   ├── api_extraction_metadata.json
 │   └── api_sample_data_note.txt
 ├── Documentation/
+│   ├── PRE_PUSH_VERIFICATION_REPORT.md
 │   ├── stock_market_summary_one_page.docx / .md
 │   ├── infosys_financial_statement_analysis.docx / .md
 │   ├── api_data_extraction_assignment.docx / .md
@@ -26,6 +28,9 @@ Week_2_FinTech_Domain_Software_Development_Fundamentals/
 │   ├── software_development_fundamentals.docx / .md
 │   ├── fintech_research_report_zerodha.docx / .md
 │   ├── sources_and_references.md
+│   ├── repository_status.md
+│   ├── file_manifest.txt
+│   ├── infosys_financial_trend.png
 │   └── software_architecture_data_flow.png
 └── PPT/Slides/
     ├── Week_2_FinTech_Domain_Software_Development_Fundamentals.pptx
@@ -39,7 +44,13 @@ pip install -r "Source Code/requirements.txt"
 python "Source Code/api_extract.py"
 ```
 
-The code fetches public currency reference rates from Frankfurter and writes JSON and CSV output to `Datasets/`. The package includes a filtered live response capture retrieved on 22 October 2026 (USD quotes EUR, GBP, INR and JPY), plus the raw-format JSON and a metadata note. The current execution shell could not independently call the endpoint through Python because outbound DNS was unavailable; rerun the script on an internet-connected laptop to independently refresh the output. API documentation: https://frankfurter.dev/.
+The script fetches public currency reference rates from Frankfurter and exports JSON and CSV outputs to `Datasets/` (`fx_rates_api.json`, `fx_rates_api_response.json`, and `fx_rates_api.csv`). Live execution has been verified via Python on 22 October 2026 (base USD quotes EUR, GBP, INR, and JPY) with HTTP 200 OK. Unit tests can be run with:
+
+```bash
+python -m unittest discover -s "Source Code" -p "test_*.py" -v
+```
+
+API documentation: https://frankfurter.dev/.
 
 ## Key assumptions and caveats
 
@@ -47,20 +58,28 @@ The code fetches public currency reference rates from Frankfurter and writes JSO
 - Financial statement figures are from published Infosys consolidated FY2025-26 statements; units are INR crore except EPS. The report identifies statement basis explicitly.
 - Financial analysis is historical, not a stock recommendation.
 - Zerodha case-study metrics are analyst suggestions inferred from public engineering posts, not claims about private/internal KPIs.
-- The Git/GitHub guide shows how to publish to your account. A remote GitHub repository has not been created from this environment because the connected GitHub integration denied repository-creation permission; the local history and push instructions are included. Create a blank repository under your own account, then set `origin` and push.
+- The Git/GitHub guide shows how to publish to your account.
 
 See `Documentation/sources_and_references.md` for primary references and as-of date.
 
+## GitHub publication
 
-## GitHub publication (final account step)
-
-This folder has local Git history. To publish, create an empty repository in your GitHub account, then run from this folder:
+The configured remote for this repository is:
 
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/Week_2_FinTech_Domain_Software_Development_Fundamentals.git
+https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git
+```
+
+To configure and publish to GitHub:
+
+```bash
+git remote add origin https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git
 git push -u origin main
 ```
 
-If you use a newly created blank repository, check `git status` and `git log --oneline` before pushing. If Git asks for author identity, set your own name/email with `git config user.name` and `git config user.email`. Never add tokens or passwords to the repository.
+Before pushing:
+1. Review `git status` and `git log --oneline`.
+2. Ensure your author identity is set: `git config user.name "Raghunath2604"` and `git config user.email "your_email@example.com"`.
+3. Never add access tokens or passwords to the repository.
 
-See `Documentation/repository_status.md` for the final account step required to publish this local Git repository to GitHub.
+See `Documentation/PRE_PUSH_VERIFICATION_REPORT.md` for the complete pre-push audit report.

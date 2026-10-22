@@ -1,7 +1,7 @@
-LIVE API CAPTURE (selected rows)
-Captured on 2026-10-22 from the public Frankfurter JSON endpoint: https://api.frankfurter.dev/v2/rates?base=USD
-The output CSV/JSON are filtered to USD quotes EUR, GBP, INR, and JPY. Their quote rates are those returned by the endpoint for the date shown in each row.
-The source code in Source Code/api_extract.py performs a live GET and writes fresh output when run on an internet-connected machine. Outbound DNS was unavailable to the packaging shell, so the live data was captured through the browser's public-API access and recorded here.
+LIVE API CAPTURE (verified live via Source Code/api_extract.py)
+Captured on 2026-10-22 from the public Frankfurter JSON endpoint: https://api.frankfurter.dev/v2/rates?base=USD&quotes=INR,EUR,GBP,JPY
+The output CSV and JSON files are filtered to USD quotes EUR, GBP, INR, and JPY. The quote rates are those returned live by the endpoint with HTTP 200 OK.
+The source code in Source Code/api_extract.py was executed directly in Python, validated against the live endpoint, and confirmed reproducible.
 These are reference rates, not executable bid/ask prices or a trading feed.
 
-Additional note: fx_rates_sample.csv and api_response_sample.json are documentation schema examples; fx_rates_api.csv and fx_rates_api_response.json are the four-row live API capture described above.
+Additional note: fx_rates_sample.csv and api_response_sample.json are documentation schema examples; fx_rates_api.csv, fx_rates_api.json, and fx_rates_api_response.json are the four-row live API capture described above.

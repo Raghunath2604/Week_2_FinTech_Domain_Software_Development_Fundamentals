@@ -45,5 +45,38 @@ class FetchRatesTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "No usable rate rows"):
             api_extract.fetch_rates("USD", ["INR"])
 
+    @patch.object(api_extract.requests, "get")
+    def test_invalid_json_raises_runtime_error(self, mock_get):
+        class InvalidJsonResponse(FakeResponse):
+            def json(self):
+                raise ValueError("Expecting value: line 1 column 1 (char 0)")
+        mock_get.return_value = InvalidJsonResponse(None)
+        with self.assertRaisesRegex(RuntimeError, "The API response was not valid JSON"):
+            api_extract.fetch_rates("USD", ["INR"])
+
+    @patch.object(api_extract.requests, "get")
+    def test_http_request_exception_handled(self, mock_get):
+        import requests
+        mock_get.side_effect = requests.RequestException("Connection timeout")
+        with self.assertRaisesRegex(RuntimeError, "API request failed"):
+            api_extract.fetch_rates("USD", ["INR"])
+
+    @patch.object(api_extract.requests, "get")
+    def test_api_error_message_payload(self, mock_get):
+        mock_get.return_value = FakeResponse({"message": "Invalid base currency"})
+        with self.assertRaisesRegex(RuntimeError, "API returned an error: Invalid base currency"):
+            api_extract.fetch_rates("INVALID", ["INR"])
+
+    @patch.object(api_extract.requests, "get")
+    def test_skips_malformed_records(self, mock_get):
+        mock_get.return_value = FakeResponse([
+            {"date": "2026-10-22", "base": "USD"},  # Missing quote and rate
+            {"date": "2026-10-22", "base": "USD", "quote": "INR", "rate": 94.49},
+        ])
+        rows = api_extract.fetch_rates("USD", ["INR"])
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["quote"], "INR")
+        self.assertEqual(rows[0]["rate"], 94.49)
+
 if __name__ == "__main__":
     unittest.main()

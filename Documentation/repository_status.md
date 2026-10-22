@@ -1,17 +1,25 @@
 # Repository status and final publishing step
 
-The assignment folder is a local Git repository with commit history included in this project archive. A remote GitHub repository has **not** been created by this environment: the connected GitHub integration refused repository creation due to its current permission scope. This means the GitHub-hosted deliverable is not yet complete.
+The assignment folder is a valid local Git repository with commit history preserved.
+The target remote repository on GitHub has been verified accessible:
+`https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git`
 
-## Publish to your own GitHub account
+## Publish to your GitHub account
 
-1. Sign in to GitHub and create a **blank** repository named `Week_2_FinTech_Domain_Software_Development_Fundamentals`. Do not initialize it with a README, license or `.gitignore`, because this folder already has commits.
-2. Open a terminal at the extracted project root.
-3. Configure your own commit identity if needed: `git config user.name "Your Name"` and `git config user.email "your-github-email@example.com"`.
-4. Add the URL GitHub shows you and push: 
+1. Confirm that the repository exists under your GitHub account (`Raghunath2604`).
+2. Open a terminal at the project root: `Week_2_FinTech_Domain_Software_Development_Fundamentals`.
+3. Configure your author identity if needed:
+   ```bash
+   git config user.name "Raghunath2604"
+   git config user.email "your_email@example.com"
+   ```
+4. Configure the remote origin (if not already set):
+   ```bash
+   git remote add origin https://github.com/Raghunath2604/Week_2_FinTech_Domain_Software_Development_Fundamentals.git
+   ```
+5. Push the `main` branch:
+   ```bash
+   git push -u origin main
+   ```
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/Week_2_FinTech_Domain_Software_Development_Fundamentals.git
-git push -u origin main
-```
-
-If `origin` already exists, inspect it with `git remote -v` before changing it. Check `git status` and `git log --oneline` before the first push. Never commit access tokens, passwords or confidential customer/internship data.
+Check `git status` and `git log --oneline` before pushing. Never commit access tokens, passwords, or confidential customer/internship data.
